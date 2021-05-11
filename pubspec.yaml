@@ -1,8 +1,7 @@
 name: app_shortcuts
 description: A flutter plugin that lets you easily add app shortcuts to the home screen
 version: 0.0.1
-author:
-homepage:
+homepage: https://github.com/cstsortan/app_shortcuts
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
