@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
+import android.util.Log
 import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat.getSystemService
 
@@ -37,12 +38,7 @@ class AppShortcutsPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, "app_shortcuts")
     channel.setMethodCallHandler(this)
-
-    shortcutManager = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      activity.getSystemService(ShortcutManager::class.java)
-    } else {
-      null
-    }
+    Log.d("TAG", "onAttachedToEngine: engine attached!")
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
@@ -85,21 +81,28 @@ class AppShortcutsPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
   override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
     channel.setMethodCallHandler(null)
+    Log.d("TAG", "onDetachedFromEngine: detached engine!")
   }
 
   override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+    Log.d("TAG", "onAttachedToActivity: attached!")
     activity = binding.activity
+    shortcutManager = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      activity.getSystemService(ShortcutManager::class.java)
+    } else {
+      null
+    }
   }
 
   override fun onDetachedFromActivityForConfigChanges() {
-
+    Log.d("TAG", "onDetachedFromActivityForConfigChanges: detached for config changes!")
   }
 
   override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-    activity = binding.activity
+    Log.d("TAG", "onReattachedToActivityForConfigChanges: reattached!")
   }
 
   override fun onDetachedFromActivity() {
-
+    Log.d("TAG", "onDetachedFromActivity: detached!")
   }
 }
