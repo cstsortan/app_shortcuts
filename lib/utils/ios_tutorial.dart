@@ -1,8 +1,8 @@
-getIosTutorialHTML(String link, String title, String description, String imageUrl, {
-  String shareButtonDescription,
-  String addToHomescreenButtonDescription,
-  String tutorialBackgroundColor
-}) {
+String getIosTutorialHTML(
+    String link, String title, String? description, String imageUrl,
+    {String? shareButtonDescription,
+    String? addToHomescreenButtonDescription,
+    String? tutorialBackgroundColor,}) {
   return '''
       <html>
       <head>
